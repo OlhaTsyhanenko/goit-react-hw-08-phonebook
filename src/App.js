@@ -7,6 +7,7 @@ import ContactList from "./components/ContactList/ContactList";
 import Filter from "./components/Filter/Filter";
 import RegisterView from "./views/RegisterView/RegisterView";
 import LoginView from "./views/LoginView/LoginView";
+import ContactsView from "./views/ContactsView/ContactsView";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <Switch>
         <Route path="/register" component={RegisterView} />
         <Route path="/login" component={LoginView} />
+        <Route path="/contacts" component={ContactsView} />
       </Switch>
 
       

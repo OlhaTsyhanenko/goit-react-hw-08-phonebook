@@ -7,12 +7,12 @@ import styles from "./contactForm.module.css";
 
 export default function ContactForm() {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
   const items = useSelector(getItems);
   const dispatch = useDispatch();
 
   const nameInputId = shortid.generate();
-  const phoneInputId = shortid.generate();
+  const numberInputId = shortid.generate();
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,8 +20,8 @@ export default function ContactForm() {
       case 'name':
         setName(value);
         break;
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
       default:
         return;
@@ -30,18 +30,19 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('name',name);
     const repeatName = name => items.find(contact => contact.name.toLowerCase() === name.toLowerCase());
     if (repeatName(name)) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(operations.addContact({ name, phone }));
+      dispatch(operations.addContact({ name, number }));
     }
     reset();
   };
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
   
   return (
@@ -59,16 +60,16 @@ export default function ContactForm() {
           className={styles.contactName}
         />
       </label>
-      <label htmlFor={phoneInputId}>Number
+      <label htmlFor={numberInputId}>Number
         <input
           type="tel"
-          name="phone"
-          value={phone}
+          name="number"
+          value={number}
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
           onChange={handleChange}
-          id={phoneInputId}
+          id={numberInputId}
           className={styles.contactNumber}
         />
       </label>
