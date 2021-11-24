@@ -1,33 +1,47 @@
 import "./App.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, Suspense, lazy } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch, Route } from "react-router";
+import authOperations from "./redux/auth/auth-operations";
 import AppBar from "./components/AppBar/AppBar";
-import ContactForm from "./components/ContactForm/ContactForm";
-import ContactList from "./components/ContactList/ContactList";
-import Filter from "./components/Filter/Filter";
-import RegisterView from "./views/RegisterView/RegisterView";
-import LoginView from "./views/LoginView/LoginView";
-import ContactsView from "./views/ContactsView/ContactsView";
+import Loader from "./components/Loader/Loader";
+import PrivateRoute from "./components/PrivateRoute";
+import PublicRoute from "./components/PublicRoute";
+import authSelectors from "./redux/auth/auth-selectors";
+
+const HomeView = lazy(() => import('./views/HomeView/HomeView'));
+const RegisterView = lazy(() => import('./views/RegisterView/RegisterView'));
+const LoginView = lazy(() => import('./views/LoginView/LoginView'));
+const ContactsView = lazy(() => import('./views/ContactsView/ContactsView'));
+
 
 export default function App() {
+  const dispatch = useDispatch();
+  const isFetchingCurrentUser = useSelector(authSelectors.getIsFetchingCurrentUser);
+
+  useEffect(() => {
+    dispatch(authOperations.fetchCurrentUser());
+  }, [dispatch]);
+  
+
   return (
-    <div className="App">
+    !isFetchingCurrentUser && (
+      <div className="App">
 
       <AppBar />
 
       <Switch>
-        <Route path="/register" component={RegisterView} />
-        <Route path="/login" component={LoginView} />
-        <Route path="/contacts" component={ContactsView} />
+        <Suspense fallback={<Loader />}>          
+          <PublicRoute exact path="/"><HomeView /></PublicRoute>
+          <PublicRoute path="/register" restricted><RegisterView /></PublicRoute>
+          <PublicRoute path="/login" restricted redirectTo="/contacts"><LoginView /></PublicRoute>
+          <PrivateRoute path="/contacts" redirectTo="/login"><ContactsView /></PrivateRoute>
+        </Suspense>
       </Switch>
 
       
-      {/* <h1>Phonebook</h1>      
-      <ContactForm />
-      <h2>Contacts</h2>
-      <Filter />
-      <ContactList /> */}
-    </div>
+    </div>)
+    
   );
   
 }
