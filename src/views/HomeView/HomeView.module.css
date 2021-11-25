@@ -1,0 +1,11 @@
+.container {
+  min-height: calc(100vh - 50px);
+  margin-top: 50px;
+}
+
+.title {
+  font-weight: 700;
+  color: rgb(13 110 253 / 55%);
+  font-size: 54;
+  text-align: center;
+}

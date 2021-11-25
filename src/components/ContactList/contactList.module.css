@@ -1,26 +1,30 @@
 .btn {
-  display: block;
+  /* display: block; */
   padding: 3px 20px;
   cursor: pointer;
-  border: none;
-  border-radius: 2px;
-  background-color: #3c8092;
-  color: #fff;
+  /* border: none; */
+  /* border-radius: 2px; */
+  /* background-color: rgb(13 110 253 / 25%); */
+  /* color: #fff; */
+  /* box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2); */
+  margin-left: auto;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
-  margin-left: auto;
+  background-color: rgb(13 110 253 / 45%);
+  color: #fff;
 }
 
 .btn:hover,
 .btn:focus {
-  background-color: hsla(193, 47%, 52%, 0.644);
-  color: #000;
+  background-color: rgb(13 110 253 / 25%);
+  color: #fff;
 }
 
 .contactList {
   padding: 0;
   margin: 0;
-  width: 380px;
+  width: 320px;
   margin-left: 50px;
 }
 
@@ -33,8 +37,8 @@
 .contactList__item::before {
   content: "";
   display: block;
-  width: 5px;
-  height: 5px;
-  background-color: #3c8092;
+  width: 10px;
+  height: 10px;
+  background-color: rgb(13 110 253 / 45%);
   margin-right: 10px;
 }

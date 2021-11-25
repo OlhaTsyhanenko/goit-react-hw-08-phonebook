@@ -1,4 +1,5 @@
 import "./App.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, Suspense, lazy } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Switch} from "react-router";
@@ -29,25 +30,20 @@ export default function App() {
   return (
     !isFetchingCurrentUser && (
       <div className="App">
-
       <AppBar />
 
-      <Switch>
-        <Suspense fallback={<Loader />}>          
-          <PublicRoute exact path="/"><HomeView /></PublicRoute>
-          <PublicRoute path="/register" restricted><RegisterView /></PublicRoute>
-          <PublicRoute path="/login" restricted redirectTo="/contacts"><LoginView /></PublicRoute>
-          <PrivateRoute path="/contacts" redirectTo="/login"><ContactsView /></PrivateRoute>
-        </Suspense>
+        <Switch>
+          <Suspense fallback={<Loader />}>
+            <PublicRoute exact path="/"><HomeView /></PublicRoute>
+            <PublicRoute path="/register" restricted><RegisterView /></PublicRoute>
+            <PublicRoute path="/login" restricted redirectTo="/contacts"><LoginView /></PublicRoute>
+            <PrivateRoute path="/contacts" redirectTo="/login"><ContactsView /></PrivateRoute>
+          </Suspense>
         </Switch>
         
         <ToastContainer autoClose={4000}/>
-
-      
     </div>)
-    
   );
-  
 }
 
 

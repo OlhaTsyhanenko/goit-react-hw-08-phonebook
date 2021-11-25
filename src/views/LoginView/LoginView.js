@@ -1,17 +1,10 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import  authOperations  from '../../redux/auth/auth-operations';
+import authOperations from '../../redux/auth/auth-operations';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import styles from "../LoginView/LoginView.module.css";
 
-const styles = {
-  form: {
-    width: 320,
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    marginBottom: 15,
-  },
-};
 
 export default function LoginView() {
   const dispatch = useDispatch();
@@ -37,32 +30,30 @@ export default function LoginView() {
   };
 
   return (
-    <div>
-      <h1>Страница логина</h1>
-
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label style={styles.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Войти</button>
-      </form>
-    </div>
+    <Form onSubmit={handleSubmit} className={styles.loginForm}>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          name="email"
+          value={email}
+          required
+          onChange={handleChange} 
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label >Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          name="password"
+          value={password}
+          required
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Button variant="outline-secondary" type="submit" className={styles.btn} >Enter</Button>
+      </Form>
   );
 }

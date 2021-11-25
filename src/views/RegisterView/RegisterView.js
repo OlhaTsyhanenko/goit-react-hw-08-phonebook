@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import  authOperations  from '../../redux/auth/auth-operations';
+import authOperations from '../../redux/auth/auth-operations';
+import { Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import styles from "../RegisterView/RegisterView.module.css";
 
 
@@ -32,37 +34,42 @@ export default function RegisterView() {
   };
 
   return (
-    <div>
-      <h1>Страница регистрации</h1>
 
-      <form onSubmit={handleSubmit} style={styles.form} autoComplete="off">
-        <label style={styles.label}>
-          Имя
-          <input type="text" name="name" value={name} onChange={handleChange} />
-        </label>
-
-        <label style={styles.label}>
-          Почта
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-          />
-        </label>
-
-        <label style={styles.label}>
-          Пароль
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={handleChange}
-          />
-        </label>
-
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
+    <Form onSubmit={handleSubmit} autoComplete="off" className={styles.regForm}>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label >Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Enter name"
+          name="name"
+          value={name}
+          required
+          onChange={handleChange} 
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label >Email</Form.Label>
+        <Form.Control
+          type="email"
+          placeholder="Enter email"
+          name="email"
+          value={email}
+          required
+          onChange={handleChange} 
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label >Password</Form.Label>
+        <Form.Control
+          type="password"
+          placeholder="Enter password"
+          name="password"
+          value={password}
+          required
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Button variant="outline-secondary" type="submit" className={styles.btn}>Enter</Button>
+      </Form>
   );
 }

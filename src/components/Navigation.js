@@ -12,7 +12,7 @@ const styles = {
     color: '#2A363B',
   },
   activeLink: {
-    color: '#E84A5F',
+    color: '#1E90FF',
   },
 };
 
@@ -23,7 +23,7 @@ const Navigation = () => {
   return (
     <nav>
       <NavLink to="/" exact style={styles.link} activeStyle={styles.activeLink}>
-        Главная
+        Home
       </NavLink>
 
       {isLoggedIn && (
@@ -33,7 +33,7 @@ const Navigation = () => {
         style={styles.link}
         activeStyle={styles.activeLink}
       >
-        Контакты
+        Contacts
         </NavLink>
       )}
 
